@@ -16,7 +16,8 @@ export default function StarRating({
   size = "24px",
   classname = "",
   // messages = ["terrible--","terrible++","bad--", "bad++", "okay", "good", "amazing"],
-  setMovieRating,
+  // setMovieRating,
+  onSetRating,
 }) {
   const [rating, setRating] = useState(0);
   const [rateHover, setRateHover] = useState(0);
@@ -24,7 +25,8 @@ export default function StarRating({
   function handleRating(rate) {
     if (rating === rate) return setRating(0);
     setRating(rate);
-    setMovieRating(rate);
+    onSetRating(rate);
+    // setMovieRating(rate);
   }
 
   const textStyle = {
@@ -40,6 +42,7 @@ export default function StarRating({
         {Array.from({ length: maxRating }, (_, i) => (
           <Star
             key={i}
+            setRating={onSetRating}
             onRate={() => handleRating(i + 1)}
             full={rateHover ? rateHover >= i + 1 : rating >= i + 1}
             onEnter={() => setRateHover(i + 1)}
